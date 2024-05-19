@@ -6,6 +6,9 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/shared/ui/form";
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
+import {useCreateLocationLocationNewPost} from "@/shared/api/location/location";
+import {useQueryClient} from "@tanstack/react-query";
+import {useCreateLocation} from "../model/store"
 
 const formSchema = z.object({
     name: z.string({required_error: "Name is required"}).min(3, {
@@ -14,12 +17,21 @@ const formSchema = z.object({
 })
 
 export const CreateLocationForm = () => {
+    const setOpen = useCreateLocation((state) => state.setOpen)
+    const queryClient = useQueryClient();
+    const mutation = useCreateLocationLocationNewPost({
+        mutation: {
+            onSuccess: () => {
+                queryClient.invalidateQueries({queryKey: ["locations"]}).then(() => setOpen(false))
+            }
+        }
+    })
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        mutation.mutate({data: values})
     }
 
     return (

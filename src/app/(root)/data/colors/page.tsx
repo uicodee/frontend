@@ -3,7 +3,6 @@
 import {DataCard} from "@/widgets/data-card";
 import {ColumnDef} from "@tanstack/table-core";
 import {DataTable} from "@/widgets/data-table";
-import {cn} from "@/shared/ui/utils";
 import {useGetColorsColorAllGet} from "@/shared/api/color/color";
 import {ColorOutput} from "@/shared/api/model";
 
@@ -19,10 +18,14 @@ export default function Page() {
         {
             accessorKey: "hex",
             header: "Color",
-            cell: ({row}) => {
-                return <div className={cn("h-6 w-6 rounded-full")}>{row.original.hex}</div>
+            cell: ({getValue}) => {
+                const hex = getValue<string>();
+                return (
+                    <div className="flex h-6 w-6 rounded-full" style={{backgroundColor: hex}}/>
+                );
             }
         }
+
     ]
     return (
         <DataCard title="Colors" isLoading={isLoading}>

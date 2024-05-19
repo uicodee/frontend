@@ -15,7 +15,7 @@ import {CreateCarButton} from "@/features/create-car";
 
 
 export default function Page() {
-    const {data: cars, isLoading} = useGetCarsCarAllGet()
+    const {data: cars, isLoading} = useGetCarsCarAllGet({query: {queryKey: ["cars"]}})
     const data = cars || []
     const columns: ColumnDef<Car>[] = [
         {

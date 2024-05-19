@@ -14,7 +14,7 @@ import {LocationOutput} from "@/shared/api/model";
 
 
 export default function Page() {
-    const {data: locations, isLoading} = useGetLocationsLocationAllGet()
+    const {data: locations, isLoading} = useGetLocationsLocationAllGet({query: {queryKey: ["locations"]}})
     const data = locations || []
     const columns: ColumnDef<LocationOutput>[] = [
         {

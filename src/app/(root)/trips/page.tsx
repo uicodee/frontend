@@ -33,6 +33,14 @@ export default function Page() {
         {
             accessorKey: "cost",
             header: "Cost",
+            accessorFn: info => {
+                const formatter = new Intl.NumberFormat("en-US", {
+                    style: "decimal",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                });
+                return formatter.format(info.cost)
+            }
         },
         {
             accessorKey: "driver",
