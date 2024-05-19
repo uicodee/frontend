@@ -1,60 +1,58 @@
-import {Metadata} from "next";
+"use client"
+
 import {DataCard} from "@/widgets/data-card";
 import {DataTable} from "@/widgets/data-table";
 import {ColumnDef} from "@tanstack/table-core";
+import {useGetTripsTripAllGet} from "@/shared/api/trip/trip";
+import {Trips} from "@/shared/api/model";
+import {Check, X} from "lucide-react";
 
-export const metadata: Metadata = {
-    title: "Trips"
-};
-
-type Trip = {
-    fromLocation: string;
-    toLocation: string;
-    driver: string;
-    price: number;
-    duration: string;
-    rating: number
-}
 
 export default function Page() {
-    const data: Trip[] = [
+    const {data: trips, isLoading} = useGetTripsTripAllGet()
+    const data = trips || []
+    const columns: ColumnDef<Trips>[] = [
         {
-            fromLocation: "Tashkent",
-            toLocation: "Ferghana",
-            driver: "Abduxalilov Abduxalil",
-            price: 100000,
-            duration: "3 hours",
-            rating: 4
-        }
-    ];
-    const columns: ColumnDef<Trip>[] = [
-        {
-            accessorKey: "fromLocation",
-            header: "From",
+            accessorKey: "departure",
+            header: "Departure",
+            accessorFn: info => info.departure.name
         },
         {
-            accessorKey: "toLocation",
-            header: "To",
+            accessorKey: "destination",
+            header: "Destination",
+            accessorFn: info => info.destination.name
+        },
+        {
+            accessorKey: "fromDate",
+            header: "From date",
+        },
+        {
+            accessorKey: "toDate",
+            header: "To date",
+        },
+        {
+            accessorKey: "cost",
+            header: "Cost",
         },
         {
             accessorKey: "driver",
             header: "Driver",
+            accessorFn: info => info.driver.fullName
         },
         {
-            accessorKey: "price",
-            header: "Price",
-        },
-        {
-            accessorKey: "duration",
-            header: "Duration",
-        },
-        {
-            accessorKey: "rating",
-            header: "Rating",
+            accessorKey: "isActive",
+            header: "Active",
+            cell: ({getValue}) => {
+                const isActive = getValue<string>();
+                return (
+                    isActive ? <Check className="h-5 w-5"/> :
+                        <X className="h-5 w-5"/>
+                );
+            }
         }
     ]
     return (
-        <DataCard title="Trips" isLoading={true}>
+        <DataCard title="Trips" isLoading={isLoading}>
             <DataTable columns={columns} data={data}/>
         </DataCard>
     )
