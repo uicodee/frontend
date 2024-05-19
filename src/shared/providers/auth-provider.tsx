@@ -25,9 +25,13 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
         if (!accessTokenStr) {
             refreshMutation.mutate()
         } else {
-            const accessToken = JSON.parse(accessTokenStr);
-            if (new Date().getTime() > accessToken.expiry) {
-                refreshMutation.mutate()
+            try {
+                const accessToken = JSON.parse(accessTokenStr);
+                if (new Date().getTime() > accessToken.expiry) {
+                    refreshMutation.mutate()
+                }
+            } catch {
+                router.replace("/login")
             }
         }
     }, [router]);

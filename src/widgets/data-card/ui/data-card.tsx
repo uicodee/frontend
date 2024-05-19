@@ -11,7 +11,7 @@ interface DataCardProps {
 
 export const DataCard = ({title, children, button, isLoading}: DataCardProps) => {
     return (
-        <Card className="flex-grow min-h-full md:h-full ">
+        <Card className="flex-grow min-h-full md:h-full">
             <div className="flex items-center justify-between">
                 <CardHeader className="px-6 pt-6 pb-1">
                     <CardTitle>{title}</CardTitle>
@@ -19,7 +19,7 @@ export const DataCard = ({title, children, button, isLoading}: DataCardProps) =>
                 </CardHeader>
                 <div className="flex px-6 pt-6 pb-1">{button}</div>
             </div>
-            <CardContent className="grid gap-8">
+            <CardContent className="flex flex-col">
                 {isLoading ? (
                     <div className="flex flex-col mt-4 space-y-4">
                         <div className="flex gap-x-2">

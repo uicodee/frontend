@@ -5,7 +5,8 @@ import {
     ColumnFiltersState,
     getCoreRowModel,
     getFilteredRowModel,
-    getPaginationRowModel
+    getPaginationRowModel,
+    VisibilityState
 } from "@tanstack/table-core";
 import {flexRender, useReactTable} from "@tanstack/react-table";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/shared/ui/table";
@@ -29,20 +30,24 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
         []
     )
+    const [columnVisibility, setColumnVisibility] =
+        useState<VisibilityState>({})
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         onColumnFiltersChange: setColumnFilters,
+        onColumnVisibilityChange: setColumnVisibility,
         getFilteredRowModel: getFilteredRowModel(),
         state: {
             columnFilters,
+            columnVisibility
         },
     })
     const [filterColumn, setFilterColumn] = useState<string>(table.getAllColumns()[0].id)
     return (
-        <div>
+        <div className="max-w-full">
             <div className="flex gap-x-2 items-center py-4">
                 <Input
                     placeholder="Search"

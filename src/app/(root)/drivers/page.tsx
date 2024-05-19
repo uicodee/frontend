@@ -14,23 +14,28 @@ export default function Page() {
         {
             accessorKey: "fullName",
             header: "Fullname",
+            enableHiding: false
         },
         {
             accessorKey: "car",
             header: "Car",
-            accessorFn: info => info.car.name
+            accessorFn: info => info.car.name,
+            enableHiding: false
         },
         {
             accessorKey: "carNumber",
             header: "Car number",
+            enableHiding: true
         },
         {
             accessorKey: "phoneNumber",
             header: "Phone number",
+            enableHiding: true
         },
         {
             accessorKey: "balance",
             header: "Balance",
+            enableHiding: false
         },
         {
             accessorKey: "status",
@@ -41,7 +46,8 @@ export default function Page() {
                     <div
                         className={`h-3 w-3 animate-pulse rounded-full ${status === "online" ? "bg-green-400" : "bg-red-500"}`}/>
                 );
-            }
+            },
+            enableHiding: true
         },
         {
             accessorKey: "isActive",
@@ -52,7 +58,8 @@ export default function Page() {
                     isActive ? <Check className="h-5 w-5"/> :
                         <X className="h-5 w-5"/>
                 );
-            }
+            },
+            enableHiding: true
         }
     ]
     return (
