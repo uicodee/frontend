@@ -9,6 +9,7 @@ import {CreateCar} from "@/shared/dialogs/car";
 import {DataTable} from "@/widgets/data-table";
 import {CreateCarButton} from "@/features/create-car";
 
+
 // export const metadata: Metadata = {
 //     title: "Cars"
 // };
