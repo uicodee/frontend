@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation";
 import {useAdminLoginLoginPost} from "@/shared/api/authentication/authentication";
 import {useEffect, useState} from "react";
 import platform from "platform";
+import {Loader} from "lucide-react";
 
 const formSchema = z.object({
     username: z.string({required_error: "Username is required"}).min(3, {
@@ -21,6 +22,7 @@ const formSchema = z.object({
 })
 
 export const LoginForm = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [info, setInfo] = useState<string>("")
     useEffect(() => {
         const info = platform.parse(navigator.userAgent);
@@ -46,6 +48,7 @@ export const LoginForm = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         mutation.mutate({data: {...values, platform: info}})
+        setIsLoading(true)
     }
 
     return (
@@ -77,7 +80,9 @@ export const LoginForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">Login</Button>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? <><Loader className="h-5 w-5 animate-spin mr-2"/> Logging in</> : 'Login'}
+                </Button>
             </form>
         </Form>
     )
