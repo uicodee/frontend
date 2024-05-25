@@ -3,6 +3,7 @@
 import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import {CreateLocationForm, useCreateLocation} from "@/features/create-location";
 
+
 export const CreateLocation = () => {
     const open = useCreateLocation((state) => state.open)
     const setOpen = useCreateLocation((state) => state.setOpen)

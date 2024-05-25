@@ -1,16 +1,16 @@
 "use client"
 
 // import {Metadata} from "next";
-import {useGetCarsCarAllGet} from "@/shared/api/car/car";
-import {ColumnDef} from "@tanstack/table-core";
-import {Car} from "@/shared/api/model";
-import {DataCard} from "@/widgets/data-card";
-import {CreateCar} from "@/shared/dialogs/car";
-import {DataTable} from "@/widgets/data-table";
-import {CreateCarButton} from "@/features/create-car";
-import {Checkbox} from "@/shared/ui/checkbox";
-import {UpdateCar} from "@/shared/dialogs/car/update-car";
-import {AspectRatio} from "@/shared/ui/aspect-ratio";
+import { CreateCarButton } from "@/features/create-car"
+import { useGetCarsCarAllGet } from "@/shared/api/car/car"
+import { Car } from "@/shared/api/model"
+import { CreateCar } from "@/shared/dialogs/car"
+import { UpdateCar } from "@/shared/dialogs/car/update-car"
+import { AspectRatio } from "@/shared/ui/aspect-ratio"
+import { Checkbox } from "@/shared/ui/checkbox"
+import { DataCard } from "@/widgets/data-card"
+import { DataTable } from "@/widgets/data-table"
+import { ColumnDef } from "@tanstack/table-core"
 
 
 // export const metadata: Metadata = {
@@ -19,7 +19,6 @@ import {AspectRatio} from "@/shared/ui/aspect-ratio";
 
 
 export default function Page() {
-    // const setOpen = useUpdateCar((state) => state.setOpen)
     const {data: cars, isLoading} = useGetCarsCarAllGet({query: {queryKey: ["cars"]}})
     const data = cars || []
     const columns: ColumnDef<Car>[] = [
