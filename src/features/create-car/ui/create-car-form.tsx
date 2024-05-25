@@ -18,7 +18,7 @@ const formSchema = z.object({
     name: z.string({required_error: "Name is required"}).min(3, {
         message: "Name length must be 3 characters",
     }).max(50),
-    numberOfSeats: z.number({required_error: "Seat count is required"}),
+    numberOfSeats: z.string({required_error: "Seat count is required"}),
     photo: (typeof window === "undefined" ? z.any() : z
         .instanceof(FileList)
         .refine(files => files.length === 1, "Please upload a single file")

@@ -32,6 +32,121 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 
 
 /**
+ * Create new location
+ * @summary Create Location
+ */
+export const createLocationLocationNewPost = (
+    locationInput: BodyType<LocationInput>,
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<LocationOutput>(
+      {url: `/location/new`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: locationInput
+    },
+      options);
+    }
+  
+
+
+export const getCreateLocationLocationNewPostMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLocationLocationNewPost>>, TError,{data: BodyType<LocationInput>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLocationLocationNewPost>>, TError,{data: BodyType<LocationInput>}, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLocationLocationNewPost>>, {data: BodyType<LocationInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLocationLocationNewPost(data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLocationLocationNewPostMutationResult = NonNullable<Awaited<ReturnType<typeof createLocationLocationNewPost>>>
+    export type CreateLocationLocationNewPostMutationBody = BodyType<LocationInput>
+    export type CreateLocationLocationNewPostMutationError = HTTPValidationError
+
+    /**
+ * @summary Create Location
+ */
+export const useCreateLocationLocationNewPost = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLocationLocationNewPost>>, TError,{data: BodyType<LocationInput>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationResult<
+        Awaited<ReturnType<typeof createLocationLocationNewPost>>,
+        TError,
+        {data: BodyType<LocationInput>},
+        TContext
+      > => {
+
+      const mutationOptions = getCreateLocationLocationNewPostMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * Delete location by ID
+ * @summary Delete Location
+ */
+export const deleteLocationLocationDeleteDelete = (
+    params: DeleteLocationLocationDeleteDeleteParams,
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<unknown>(
+      {url: `/location/delete`, method: 'DELETE',
+        params
+    },
+      options);
+    }
+  
+
+
+export const getDeleteLocationLocationDeleteDeleteMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, {params: DeleteLocationLocationDeleteDeleteParams}> = (props) => {
+          const {params} = props ?? {};
+
+          return  deleteLocationLocationDeleteDelete(params,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteLocationLocationDeleteDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>>
+    
+    export type DeleteLocationLocationDeleteDeleteMutationError = HTTPValidationError
+
+    /**
+ * @summary Delete Location
+ */
+export const useDeleteLocationLocationDeleteDelete = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationResult<
+        Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>,
+        TError,
+        {params: DeleteLocationLocationDeleteDeleteParams},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteLocationLocationDeleteDeleteMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
  * Get all location
  * @summary Get Locations
  */
@@ -217,119 +332,3 @@ export const useGetChildrenLocationsLocationLocationIdChildrenGet = <TData = Awa
 
 
 
-/**
- * Create new location
- * @summary Create Location
- */
-export const createLocationLocationNewPost = (
-    locationInput: BodyType<LocationInput>,
- options?: SecondParameter<typeof createInstance>,) => {
-      
-      
-      return createInstance<LocationOutput>(
-      {url: `/location/new`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: locationInput
-    },
-      options);
-    }
-  
-
-
-export const getCreateLocationLocationNewPostMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLocationLocationNewPost>>, TError,{data: BodyType<LocationInput>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof createLocationLocationNewPost>>, TError,{data: BodyType<LocationInput>}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLocationLocationNewPost>>, {data: BodyType<LocationInput>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  createLocationLocationNewPost(data,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type CreateLocationLocationNewPostMutationResult = NonNullable<Awaited<ReturnType<typeof createLocationLocationNewPost>>>
-    export type CreateLocationLocationNewPostMutationBody = BodyType<LocationInput>
-    export type CreateLocationLocationNewPostMutationError = HTTPValidationError
-
-    /**
- * @summary Create Location
- */
-export const useCreateLocationLocationNewPost = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLocationLocationNewPost>>, TError,{data: BodyType<LocationInput>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationResult<
-        Awaited<ReturnType<typeof createLocationLocationNewPost>>,
-        TError,
-        {data: BodyType<LocationInput>},
-        TContext
-      > => {
-
-      const mutationOptions = getCreateLocationLocationNewPostMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    /**
- * Delete location by ID
- * @summary Delete Location
- */
-export const deleteLocationLocationDeleteDelete = (
-    params: DeleteLocationLocationDeleteDeleteParams,
- options?: SecondParameter<typeof createInstance>,) => {
-      
-      
-      return createInstance<unknown>(
-      {url: `/location/delete`, method: 'DELETE',
-        params
-    },
-      options);
-    }
-  
-
-
-export const getDeleteLocationLocationDeleteDeleteMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, {params: DeleteLocationLocationDeleteDeleteParams}> = (props) => {
-          const {params} = props ?? {};
-
-          return  deleteLocationLocationDeleteDelete(params,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteLocationLocationDeleteDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>>
-    
-    export type DeleteLocationLocationDeleteDeleteMutationError = HTTPValidationError
-
-    /**
- * @summary Delete Location
- */
-export const useDeleteLocationLocationDeleteDelete = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationResult<
-        Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>,
-        TError,
-        {params: DeleteLocationLocationDeleteDeleteParams},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteLocationLocationDeleteDeleteMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    

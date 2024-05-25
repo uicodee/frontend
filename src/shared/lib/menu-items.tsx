@@ -1,4 +1,15 @@
-import {Car, LayoutDashboard, LogOut, MapPin, Palette, Settings2, SquareUser, TrafficCone, Users} from "lucide-react";
+import {
+    Car,
+    LayoutDashboard,
+    LogOut,
+    MapPin,
+    Palette,
+    Settings2,
+    SquareUser,
+    TicketPercent,
+    TrafficCone,
+    Users
+} from "lucide-react";
 
 export const topMenuItems = [
     {
@@ -25,6 +36,11 @@ export const topMenuItems = [
         title: "Cars",
         link: "/data/cars",
         icon: <Car className="size-5" strokeWidth={1.75}/>
+    },
+    {
+        title: "Promocodes",
+        link: "/data/promocodes",
+        icon: <TicketPercent className="size-5" strokeWidth={1.75}/>
     },
     {
         title: "Locations",

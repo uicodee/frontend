@@ -20,7 +20,6 @@ export default function Page() {
                 <CardContent>
                     {data.map(session => (
                         <div key={session.id}>
-                            <div className="font-semibold">{session.platform}</div>
                             <p className="text-sm">{session.ipAddress}</p>
                         </div>
                     ))}

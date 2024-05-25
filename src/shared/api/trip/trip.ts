@@ -27,68 +27,6 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 
 
 /**
- * @summary Search Trips
- */
-export const searchTripsTripSearchGet = (
-    params: SearchTripsTripSearchGetParams,
- options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
-) => {
-      
-      
-      return createInstance<TripOutput[]>(
-      {url: `/trip/search`, method: 'GET',
-        params, signal
-    },
-      options);
-    }
-  
-
-export const getSearchTripsTripSearchGetQueryKey = (params: SearchTripsTripSearchGetParams,) => {
-    return [`/trip/search`, ...(params ? [params]: [])] as const;
-    }
-
-    
-export const getSearchTripsTripSearchGetQueryOptions = <TData = Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError = HTTPValidationError>(params: SearchTripsTripSearchGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getSearchTripsTripSearchGetQueryKey(params);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof searchTripsTripSearchGet>>> = ({ signal }) => searchTripsTripSearchGet(params, requestOptions, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type SearchTripsTripSearchGetQueryResult = NonNullable<Awaited<ReturnType<typeof searchTripsTripSearchGet>>>
-export type SearchTripsTripSearchGetQueryError = HTTPValidationError
-
-/**
- * @summary Search Trips
- */
-export const useSearchTripsTripSearchGet = <TData = Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError = HTTPValidationError>(
- params: SearchTripsTripSearchGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-
-  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getSearchTripsTripSearchGetQueryOptions(params,options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-/**
  * Get all trips
  * @summary Get Trips
  */
@@ -140,6 +78,68 @@ export const useGetTripsTripAllGet = <TData = Awaited<ReturnType<typeof getTrips
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
   const queryOptions = getGetTripsTripAllGetQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+/**
+ * @summary Search Trips
+ */
+export const searchTripsTripSearchGet = (
+    params: SearchTripsTripSearchGetParams,
+ options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return createInstance<TripOutput[]>(
+      {url: `/trip/search`, method: 'GET',
+        params, signal
+    },
+      options);
+    }
+  
+
+export const getSearchTripsTripSearchGetQueryKey = (params: SearchTripsTripSearchGetParams,) => {
+    return [`/trip/search`, ...(params ? [params]: [])] as const;
+    }
+
+    
+export const getSearchTripsTripSearchGetQueryOptions = <TData = Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError = HTTPValidationError>(params: SearchTripsTripSearchGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getSearchTripsTripSearchGetQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof searchTripsTripSearchGet>>> = ({ signal }) => searchTripsTripSearchGet(params, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type SearchTripsTripSearchGetQueryResult = NonNullable<Awaited<ReturnType<typeof searchTripsTripSearchGet>>>
+export type SearchTripsTripSearchGetQueryError = HTTPValidationError
+
+/**
+ * @summary Search Trips
+ */
+export const useSearchTripsTripSearchGet = <TData = Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError = HTTPValidationError>(
+ params: SearchTripsTripSearchGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof searchTripsTripSearchGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getSearchTripsTripSearchGetQueryOptions(params,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

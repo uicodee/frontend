@@ -41,6 +41,183 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 
 
 /**
+ * Get all drivers
+ * @summary Get Drivers
+ */
+export const getDriversDriverAllGet = (
+    
+ options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return createInstance<Driver[]>(
+      {url: `/driver/all`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+export const getGetDriversDriverAllGetQueryKey = () => {
+    return [`/driver/all`] as const;
+    }
+
+    
+export const getGetDriversDriverAllGetQueryOptions = <TData = Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetDriversDriverAllGetQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getDriversDriverAllGet>>> = ({ signal }) => getDriversDriverAllGet(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetDriversDriverAllGetQueryResult = NonNullable<Awaited<ReturnType<typeof getDriversDriverAllGet>>>
+export type GetDriversDriverAllGetQueryError = unknown
+
+/**
+ * @summary Get Drivers
+ */
+export const useGetDriversDriverAllGet = <TData = Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetDriversDriverAllGetQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+/**
+ * Edit driver
+ * @summary Edit Driver
+ */
+export const editDriverDriverEditPut = (
+    editDriver: BodyType<EditDriver>,
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<BaseDriver>(
+      {url: `/driver/edit`, method: 'PUT',
+      headers: {'Content-Type': 'application/json', },
+      data: editDriver
+    },
+      options);
+    }
+  
+
+
+export const getEditDriverDriverEditPutMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editDriverDriverEditPut>>, TError,{data: BodyType<EditDriver>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof editDriverDriverEditPut>>, TError,{data: BodyType<EditDriver>}, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof editDriverDriverEditPut>>, {data: BodyType<EditDriver>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  editDriverDriverEditPut(data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type EditDriverDriverEditPutMutationResult = NonNullable<Awaited<ReturnType<typeof editDriverDriverEditPut>>>
+    export type EditDriverDriverEditPutMutationBody = BodyType<EditDriver>
+    export type EditDriverDriverEditPutMutationError = HTTPValidationError
+
+    /**
+ * @summary Edit Driver
+ */
+export const useEditDriverDriverEditPut = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editDriverDriverEditPut>>, TError,{data: BodyType<EditDriver>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationResult<
+        Awaited<ReturnType<typeof editDriverDriverEditPut>>,
+        TError,
+        {data: BodyType<EditDriver>},
+        TContext
+      > => {
+
+      const mutationOptions = getEditDriverDriverEditPutMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * Delete driver by ID
+ * @summary Delete Driver
+ */
+export const deleteDriverDriverDeleteDelete = (
+    params: DeleteDriverDriverDeleteDeleteParams,
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<unknown>(
+      {url: `/driver/delete`, method: 'DELETE',
+        params
+    },
+      options);
+    }
+  
+
+
+export const getDeleteDriverDriverDeleteDeleteMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, TError,{params: DeleteDriverDriverDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, TError,{params: DeleteDriverDriverDeleteDeleteParams}, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, {params: DeleteDriverDriverDeleteDeleteParams}> = (props) => {
+          const {params} = props ?? {};
+
+          return  deleteDriverDriverDeleteDelete(params,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteDriverDriverDeleteDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>>
+    
+    export type DeleteDriverDriverDeleteDeleteMutationError = HTTPValidationError
+
+    /**
+ * @summary Delete Driver
+ */
+export const useDeleteDriverDriverDeleteDelete = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, TError,{params: DeleteDriverDriverDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationResult<
+        Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>,
+        TError,
+        {params: DeleteDriverDriverDeleteDeleteParams},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteDriverDriverDeleteDeleteMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
  * Authorize driver
  * @summary Auth Driver
  */
@@ -454,181 +631,3 @@ export const useGetActiveTripDriverActiveTripGet = <TData = Awaited<ReturnType<t
 
 
 
-/**
- * Get all drivers
- * @summary Get Drivers
- */
-export const getDriversDriverAllGet = (
-    
- options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
-) => {
-      
-      
-      return createInstance<Driver[]>(
-      {url: `/driver/all`, method: 'GET', signal
-    },
-      options);
-    }
-  
-
-export const getGetDriversDriverAllGetQueryKey = () => {
-    return [`/driver/all`] as const;
-    }
-
-    
-export const getGetDriversDriverAllGetQueryOptions = <TData = Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetDriversDriverAllGetQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getDriversDriverAllGet>>> = ({ signal }) => getDriversDriverAllGet(requestOptions, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type GetDriversDriverAllGetQueryResult = NonNullable<Awaited<ReturnType<typeof getDriversDriverAllGet>>>
-export type GetDriversDriverAllGetQueryError = unknown
-
-/**
- * @summary Get Drivers
- */
-export const useGetDriversDriverAllGet = <TData = Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getDriversDriverAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-
-  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getGetDriversDriverAllGetQueryOptions(options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-/**
- * Edit driver
- * @summary Edit Driver
- */
-export const editDriverDriverEditPut = (
-    editDriver: BodyType<EditDriver>,
- options?: SecondParameter<typeof createInstance>,) => {
-      
-      
-      return createInstance<BaseDriver>(
-      {url: `/driver/edit`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: editDriver
-    },
-      options);
-    }
-  
-
-
-export const getEditDriverDriverEditPutMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editDriverDriverEditPut>>, TError,{data: BodyType<EditDriver>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof editDriverDriverEditPut>>, TError,{data: BodyType<EditDriver>}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof editDriverDriverEditPut>>, {data: BodyType<EditDriver>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  editDriverDriverEditPut(data,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type EditDriverDriverEditPutMutationResult = NonNullable<Awaited<ReturnType<typeof editDriverDriverEditPut>>>
-    export type EditDriverDriverEditPutMutationBody = BodyType<EditDriver>
-    export type EditDriverDriverEditPutMutationError = HTTPValidationError
-
-    /**
- * @summary Edit Driver
- */
-export const useEditDriverDriverEditPut = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editDriverDriverEditPut>>, TError,{data: BodyType<EditDriver>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationResult<
-        Awaited<ReturnType<typeof editDriverDriverEditPut>>,
-        TError,
-        {data: BodyType<EditDriver>},
-        TContext
-      > => {
-
-      const mutationOptions = getEditDriverDriverEditPutMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    /**
- * Delete driver by ID
- * @summary Delete Driver
- */
-export const deleteDriverDriverDeleteDelete = (
-    params: DeleteDriverDriverDeleteDeleteParams,
- options?: SecondParameter<typeof createInstance>,) => {
-      
-      
-      return createInstance<unknown>(
-      {url: `/driver/delete`, method: 'DELETE',
-        params
-    },
-      options);
-    }
-  
-
-
-export const getDeleteDriverDriverDeleteDeleteMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, TError,{params: DeleteDriverDriverDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, TError,{params: DeleteDriverDriverDeleteDeleteParams}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, {params: DeleteDriverDriverDeleteDeleteParams}> = (props) => {
-          const {params} = props ?? {};
-
-          return  deleteDriverDriverDeleteDelete(params,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteDriverDriverDeleteDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>>
-    
-    export type DeleteDriverDriverDeleteDeleteMutationError = HTTPValidationError
-
-    /**
- * @summary Delete Driver
- */
-export const useDeleteDriverDriverDeleteDelete = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>, TError,{params: DeleteDriverDriverDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationResult<
-        Awaited<ReturnType<typeof deleteDriverDriverDeleteDelete>>,
-        TError,
-        {params: DeleteDriverDriverDeleteDeleteParams},
-        TContext
-      > => {
-
-      const mutationOptions = getDeleteDriverDriverDeleteDeleteMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    

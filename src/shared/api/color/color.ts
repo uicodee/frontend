@@ -33,68 +33,6 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 
 
 /**
- * Get all colors
- * @summary Get Colors
- */
-export const getColorsColorAllGet = (
-    
- options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
-) => {
-      
-      
-      return createInstance<ColorOutput[]>(
-      {url: `/color/all`, method: 'GET', signal
-    },
-      options);
-    }
-  
-
-export const getGetColorsColorAllGetQueryKey = () => {
-    return [`/color/all`] as const;
-    }
-
-    
-export const getGetColorsColorAllGetQueryOptions = <TData = Awaited<ReturnType<typeof getColorsColorAllGet>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsColorAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetColorsColorAllGetQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getColorsColorAllGet>>> = ({ signal }) => getColorsColorAllGet(requestOptions, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getColorsColorAllGet>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type GetColorsColorAllGetQueryResult = NonNullable<Awaited<ReturnType<typeof getColorsColorAllGet>>>
-export type GetColorsColorAllGetQueryError = unknown
-
-/**
- * @summary Get Colors
- */
-export const useGetColorsColorAllGet = <TData = Awaited<ReturnType<typeof getColorsColorAllGet>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsColorAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-
-  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getGetColorsColorAllGetQueryOptions(options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-/**
  * Create color
  * @summary Create Color
  */
@@ -267,4 +205,65 @@ export const useDeleteCarColorDeleteDelete = <TError = HTTPValidationError,
 
       return useMutation(mutationOptions);
     }
+    /**
+ * Get all colors
+ * @summary Get Colors
+ */
+export const getColorsColorAllGet = (
     
+ options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return createInstance<ColorOutput[]>(
+      {url: `/color/all`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+export const getGetColorsColorAllGetQueryKey = () => {
+    return [`/color/all`] as const;
+    }
+
+    
+export const getGetColorsColorAllGetQueryOptions = <TData = Awaited<ReturnType<typeof getColorsColorAllGet>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsColorAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetColorsColorAllGetQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getColorsColorAllGet>>> = ({ signal }) => getColorsColorAllGet(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getColorsColorAllGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetColorsColorAllGetQueryResult = NonNullable<Awaited<ReturnType<typeof getColorsColorAllGet>>>
+export type GetColorsColorAllGetQueryError = unknown
+
+/**
+ * @summary Get Colors
+ */
+export const useGetColorsColorAllGet = <TData = Awaited<ReturnType<typeof getColorsColorAllGet>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getColorsColorAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetColorsColorAllGetQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+

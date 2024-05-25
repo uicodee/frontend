@@ -1,0 +1,1 @@
+export {PromocodesTable} from "./ui/promocodes-table"

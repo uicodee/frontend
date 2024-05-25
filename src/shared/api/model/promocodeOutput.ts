@@ -5,16 +5,19 @@
  * Taxopark is a company that transports passengers between cities
  * OpenAPI spec version: 1.0.0
  */
+import type { PromocodeType } from './promocodeType';
 
-export interface Session {
+export interface PromocodeOutput {
   /** Current object created at time */
   createdAt: string;
+  expiresAt: string;
   /**
    * Current object ID
    */
   id: number;
-  ipAddress: string;
-  refreshToken: string;
+  promocode: string;
+  type: PromocodeType;
   /** Current object updated at time */
   updatedAt: string;
+  value: number;
 }

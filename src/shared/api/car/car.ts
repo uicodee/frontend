@@ -35,130 +35,6 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 
 
 /**
- * Get all cars
- * @summary Get Cars
- */
-export const getCarsCarAllGet = (
-    
- options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
-) => {
-      
-      
-      return createInstance<Car[]>(
-      {url: `/car/all`, method: 'GET', signal
-    },
-      options);
-    }
-  
-
-export const getGetCarsCarAllGetQueryKey = () => {
-    return [`/car/all`] as const;
-    }
-
-    
-export const getGetCarsCarAllGetQueryOptions = <TData = Awaited<ReturnType<typeof getCarsCarAllGet>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarsCarAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetCarsCarAllGetQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCarsCarAllGet>>> = ({ signal }) => getCarsCarAllGet(requestOptions, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCarsCarAllGet>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type GetCarsCarAllGetQueryResult = NonNullable<Awaited<ReturnType<typeof getCarsCarAllGet>>>
-export type GetCarsCarAllGetQueryError = unknown
-
-/**
- * @summary Get Cars
- */
-export const useGetCarsCarAllGet = <TData = Awaited<ReturnType<typeof getCarsCarAllGet>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarsCarAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-
-  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getGetCarsCarAllGetQueryOptions(options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-/**
- * Get single car by ID
- * @summary Get Car
- */
-export const getCarCarCarIdGet = (
-    carId: number,
- options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
-) => {
-      
-      
-      return createInstance<Car>(
-      {url: `/car/${carId}`, method: 'GET', signal
-    },
-      options);
-    }
-  
-
-export const getGetCarCarCarIdGetQueryKey = (carId: number,) => {
-    return [`/car/${carId}`] as const;
-    }
-
-    
-export const getGetCarCarCarIdGetQueryOptions = <TData = Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError = HTTPValidationError>(carId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetCarCarCarIdGetQueryKey(carId);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCarCarCarIdGet>>> = ({ signal }) => getCarCarCarIdGet(carId, requestOptions, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(carId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type GetCarCarCarIdGetQueryResult = NonNullable<Awaited<ReturnType<typeof getCarCarCarIdGet>>>
-export type GetCarCarCarIdGetQueryError = HTTPValidationError
-
-/**
- * @summary Get Car
- */
-export const useGetCarCarCarIdGet = <TData = Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError = HTTPValidationError>(
- carId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
-
-  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getGetCarCarCarIdGetQueryOptions(carId,options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-/**
  * Create new car
  * @summary Create Car
  */
@@ -339,4 +215,127 @@ export const useDeleteCarCarDeleteDelete = <TError = HTTPValidationError,
 
       return useMutation(mutationOptions);
     }
+    /**
+ * Get all cars
+ * @summary Get Cars
+ */
+export const getCarsCarAllGet = (
     
+ options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return createInstance<Car[]>(
+      {url: `/car/all`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+export const getGetCarsCarAllGetQueryKey = () => {
+    return [`/car/all`] as const;
+    }
+
+    
+export const getGetCarsCarAllGetQueryOptions = <TData = Awaited<ReturnType<typeof getCarsCarAllGet>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarsCarAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetCarsCarAllGetQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCarsCarAllGet>>> = ({ signal }) => getCarsCarAllGet(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCarsCarAllGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetCarsCarAllGetQueryResult = NonNullable<Awaited<ReturnType<typeof getCarsCarAllGet>>>
+export type GetCarsCarAllGetQueryError = unknown
+
+/**
+ * @summary Get Cars
+ */
+export const useGetCarsCarAllGet = <TData = Awaited<ReturnType<typeof getCarsCarAllGet>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarsCarAllGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetCarsCarAllGetQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+/**
+ * Get single car by ID
+ * @summary Get Car
+ */
+export const getCarCarCarIdGet = (
+    carId: number,
+ options?: SecondParameter<typeof createInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return createInstance<Car>(
+      {url: `/car/${carId}`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+export const getGetCarCarCarIdGetQueryKey = (carId: number,) => {
+    return [`/car/${carId}`] as const;
+    }
+
+    
+export const getGetCarCarCarIdGetQueryOptions = <TData = Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError = HTTPValidationError>(carId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetCarCarCarIdGetQueryKey(carId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCarCarCarIdGet>>> = ({ signal }) => getCarCarCarIdGet(carId, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(carId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetCarCarCarIdGetQueryResult = NonNullable<Awaited<ReturnType<typeof getCarCarCarIdGet>>>
+export type GetCarCarCarIdGetQueryError = HTTPValidationError
+
+/**
+ * @summary Get Car
+ */
+export const useGetCarCarCarIdGet = <TData = Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError = HTTPValidationError>(
+ carId: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCarCarCarIdGet>>, TError, TData>>, request?: SecondParameter<typeof createInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetCarCarCarIdGetQueryOptions(carId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
