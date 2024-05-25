@@ -1,35 +1,19 @@
-"use client"
-
 import {DataCard} from "@/widgets/data-card";
-import {ColumnDef} from "@tanstack/table-core";
-import {DataTable} from "@/widgets/data-table";
-import {useGetColorsColorAllGet} from "@/shared/api/color/color";
-import {ColorOutput} from "@/shared/api/model";
+import {ColorsTable} from "@/features/get-colors";
+import {Metadata} from "next";
+import {CreateColor} from "@/shared/dialogs/color";
+import {CreateColorButton} from "@/features/create-color";
+
+export const metadata: Metadata = {
+    title: "Colors"
+};
 
 
 export default function Page() {
-    const {data: colors, isLoading} = useGetColorsColorAllGet()
-    const data = colors || []
-    const columns: ColumnDef<ColorOutput>[] = [
-        {
-            accessorKey: "name",
-            header: "Name",
-        },
-        {
-            accessorKey: "hex",
-            header: "Color",
-            cell: ({getValue}) => {
-                const hex = getValue<string>();
-                return (
-                    <div className="flex h-6 w-6 rounded-full" style={{backgroundColor: hex}}/>
-                );
-            }
-        }
-
-    ]
     return (
-        <DataCard title="Colors" isLoading={isLoading}>
-            <DataTable columns={columns} data={data}/>
+        <DataCard title="Colors" button={<CreateColorButton/>}>
+            <CreateColor/>
+            <ColorsTable/>
         </DataCard>
     )
 }

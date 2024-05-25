@@ -1,14 +1,14 @@
 "use client"
-import {useMediaQuery} from "@uidotdev/usehooks";
 import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import {CreateCarForm, useCreateCar} from "@/features/create-car";
 import {Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} from "@/shared/ui/drawer";
+import {useMediaQuery} from 'react-responsive'
 
 
 export const CreateCar = () => {
     const open = useCreateCar((state) => state.open)
     const setOpen = useCreateCar((state) => state.setOpen)
-    const isSmallDevice = useMediaQuery("only screen and (max-width : 640px)");
+    const isSmallDevice = useMediaQuery({query: 'only screen and (max-width: 640px)'});
 
     return (
         isSmallDevice ? (

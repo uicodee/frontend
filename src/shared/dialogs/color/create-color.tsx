@@ -1,14 +1,13 @@
 "use client"
 
-import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
-import {CreateLocationForm, useCreateLocation} from "@/features/create-location";
+import {CreateColorForm, useCreateColor} from "@/features/create-color";
 import {useMediaQuery} from "react-responsive";
 import {Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} from "@/shared/ui/drawer";
+import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 
-
-export const CreateLocation = () => {
-    const open = useCreateLocation((state) => state.open)
-    const setOpen = useCreateLocation((state) => state.setOpen)
+export const CreateColor = () => {
+    const open = useCreateColor((state) => state.open)
+    const setOpen = useCreateColor((state) => state.setOpen)
     const isSmallDevice = useMediaQuery({query: 'only screen and (max-width: 640px)'});
 
     return (
@@ -17,10 +16,10 @@ export const CreateLocation = () => {
                 <DrawerContent>
                     <div className="px-4 pt-3 py-10 w-full">
                         <DrawerHeader>
-                            <DrawerTitle>Create location</DrawerTitle>
-                            <DrawerDescription>Fill the form and create location</DrawerDescription>
+                            <DrawerTitle>Create color</DrawerTitle>
+                            <DrawerDescription>Fill the form and create color</DrawerDescription>
                         </DrawerHeader>
-                        <CreateLocationForm/>
+                        <CreateColorForm/>
                     </div>
                 </DrawerContent>
             </Drawer>
@@ -28,12 +27,12 @@ export const CreateLocation = () => {
             <Dialog open={open} onOpenChange={() => setOpen(!open)}>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Create location</DialogTitle>
+                        <DialogTitle>Create color</DialogTitle>
                         <DialogDescription>
-                            Fill the form and create location
+                            Fill the form and create color
                         </DialogDescription>
                     </DialogHeader>
-                    <CreateLocationForm/>
+                    <CreateColorForm/>
                 </DialogContent>
             </Dialog>
         )

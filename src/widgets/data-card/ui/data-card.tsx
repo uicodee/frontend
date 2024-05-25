@@ -1,15 +1,13 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/shared/ui/card";
 import {ReactNode} from "react";
-import {Skeleton} from "@/shared/ui/skeleton";
 
 interface DataCardProps {
     title: string;
     children: ReactNode;
-    button?: ReactNode;
-    isLoading: boolean
+    button?: ReactNode
 }
 
-export const DataCard = ({title, children, button, isLoading}: DataCardProps) => {
+export const DataCard = ({title, children, button}: DataCardProps) => {
     return (
         <Card className="flex-grow min-h-full md:h-full">
             <div className="flex items-center justify-between">
@@ -20,17 +18,7 @@ export const DataCard = ({title, children, button, isLoading}: DataCardProps) =>
                 <div className="flex px-6 pt-6 pb-1">{button}</div>
             </div>
             <CardContent className="flex flex-col">
-                {isLoading ? (
-                    <div className="flex flex-col mt-4 space-y-4">
-                        <div className="flex gap-x-2">
-                            <Skeleton className="h-8 w-full md:w-[250px]"/>
-                            <Skeleton className="h-8 w-[100px]"/>
-                        </div>
-                        <div className="flex">
-                            <Skeleton className="w-full h-[200px] rounded-md"/>
-                        </div>
-                    </div>
-                ) : children}
+                {children}
             </CardContent>
         </Card>
     )

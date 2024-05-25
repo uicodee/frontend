@@ -1,5 +1,5 @@
 "use client"
-import {useMediaQuery} from "@uidotdev/usehooks";
+import {useMediaQuery} from "react-responsive";
 import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import {UpdateCarForm, useUpdateCar} from "@/features/update-car";
 import {Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} from "@/shared/ui/drawer";
@@ -8,7 +8,7 @@ import {Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} fro
 export const UpdateCar = () => {
     const open = useUpdateCar((state) => state.open)
     const setOpen = useUpdateCar((state) => state.setOpen)
-    const isSmallDevice = useMediaQuery("only screen and (max-width : 640px)");
+    const isSmallDevice = useMediaQuery({query: 'only screen and (max-width : 640px)'});
     return (
         isSmallDevice ? (
             <Drawer open={open} onOpenChange={(open) => setOpen(open)}>
