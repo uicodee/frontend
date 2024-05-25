@@ -26,9 +26,7 @@ import type {
   CreateDriver,
   DeleteDriverDriverDeleteDeleteParams,
   Driver,
-  EditBalance,
   EditDriver,
-  EditDriverConfirm,
   HTTPValidationError,
   Otp,
   OtpCode,
@@ -519,122 +517,6 @@ export const useGetDriversDriverAllGet = <TData = Awaited<ReturnType<typeof getD
 
 
 /**
- * Edit driver is active
- * @summary Driver Is Active
- */
-export const driverIsActiveDriverActivePut = (
-    editDriverConfirm: BodyType<EditDriverConfirm>,
- options?: SecondParameter<typeof createInstance>,) => {
-      
-      
-      return createInstance<BaseDriver>(
-      {url: `/driver/active`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: editDriverConfirm
-    },
-      options);
-    }
-  
-
-
-export const getDriverIsActiveDriverActivePutMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof driverIsActiveDriverActivePut>>, TError,{data: BodyType<EditDriverConfirm>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof driverIsActiveDriverActivePut>>, TError,{data: BodyType<EditDriverConfirm>}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof driverIsActiveDriverActivePut>>, {data: BodyType<EditDriverConfirm>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  driverIsActiveDriverActivePut(data,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DriverIsActiveDriverActivePutMutationResult = NonNullable<Awaited<ReturnType<typeof driverIsActiveDriverActivePut>>>
-    export type DriverIsActiveDriverActivePutMutationBody = BodyType<EditDriverConfirm>
-    export type DriverIsActiveDriverActivePutMutationError = HTTPValidationError
-
-    /**
- * @summary Driver Is Active
- */
-export const useDriverIsActiveDriverActivePut = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof driverIsActiveDriverActivePut>>, TError,{data: BodyType<EditDriverConfirm>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationResult<
-        Awaited<ReturnType<typeof driverIsActiveDriverActivePut>>,
-        TError,
-        {data: BodyType<EditDriverConfirm>},
-        TContext
-      > => {
-
-      const mutationOptions = getDriverIsActiveDriverActivePutMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    /**
- * Edit driver balance
- * @summary Edit Balance
- */
-export const editBalanceDriverEditBalancePut = (
-    editBalance: BodyType<EditBalance>,
- options?: SecondParameter<typeof createInstance>,) => {
-      
-      
-      return createInstance<BaseDriver>(
-      {url: `/driver/edit-balance`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: editBalance
-    },
-      options);
-    }
-  
-
-
-export const getEditBalanceDriverEditBalancePutMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editBalanceDriverEditBalancePut>>, TError,{data: BodyType<EditBalance>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof editBalanceDriverEditBalancePut>>, TError,{data: BodyType<EditBalance>}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof editBalanceDriverEditBalancePut>>, {data: BodyType<EditBalance>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  editBalanceDriverEditBalancePut(data,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type EditBalanceDriverEditBalancePutMutationResult = NonNullable<Awaited<ReturnType<typeof editBalanceDriverEditBalancePut>>>
-    export type EditBalanceDriverEditBalancePutMutationBody = BodyType<EditBalance>
-    export type EditBalanceDriverEditBalancePutMutationError = HTTPValidationError
-
-    /**
- * @summary Edit Balance
- */
-export const useEditBalanceDriverEditBalancePut = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editBalanceDriverEditBalancePut>>, TError,{data: BodyType<EditBalance>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationResult<
-        Awaited<ReturnType<typeof editBalanceDriverEditBalancePut>>,
-        TError,
-        {data: BodyType<EditBalance>},
-        TContext
-      > => {
-
-      const mutationOptions = getEditBalanceDriverEditBalancePutMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    /**
  * Edit driver
  * @summary Edit Driver
  */

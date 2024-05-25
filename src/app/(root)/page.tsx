@@ -3,8 +3,11 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/shared/ui/card";
 import {Car, CarTaxiFront, Mail, MapPin, TrafficCone, Users} from "lucide-react";
 import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis} from "recharts";
+import {useGetAllStatsStatisticsAllGet} from "@/shared/api/statistics/statistics";
+import {Skeleton} from "@/shared/ui/skeleton";
 
 export default function Home() {
+    const {data: statistics, isLoading} = useGetAllStatsStatisticsAllGet({query: {queryKey: ["statistics"]}})
     const data = [
         {
             name: "Jan",
@@ -58,32 +61,32 @@ export default function Home() {
     const datas = [
         {
             name: "Cars",
-            value: 100,
+            value: statistics?.cars,
             icon: <Car/>
         },
         {
             name: "Locations",
-            value: 10,
+            value: statistics?.locations,
             icon: <MapPin/>
         },
         {
             name: "Drivers",
-            value: 1000,
+            value: statistics?.drivers,
             icon: <CarTaxiFront/>
         },
         {
             name: "Passengers",
-            value: 1000,
+            value: statistics?.passengers,
             icon: <Users/>
         },
         {
             name: "Trips",
-            value: 5,
+            value: statistics?.trips,
             icon: <TrafficCone/>
         },
         {
             name: "SMS",
-            value: 10000,
+            value: statistics?.sms,
             icon: <Mail/>
         }
     ]
@@ -99,10 +102,17 @@ export default function Home() {
                             {item.icon}
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">{item.value}</div>
-                            <p className="text-xs text-muted-foreground">
-                                +20.1% from last month
-                            </p>
+                            {isLoading ?
+                                <div className="space-y-2">
+                                    <Skeleton className="h-7 w-full"/>
+                                    <Skeleton className="h-3 w-full"/>
+                                </div> :
+                                <>
+                                    <div className="text-2xl font-bold">{item.value}</div>
+                                    <p className="text-xs text-muted-foreground">
+                                        +20.1% from last month
+                                    </p>
+                                </>}
                         </CardContent>
                     </Card>
                 ))}

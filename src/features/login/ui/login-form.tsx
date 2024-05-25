@@ -8,12 +8,11 @@ import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
 import {useRouter} from "next/navigation";
 import {useAdminLoginLoginPost} from "@/shared/api/authentication/authentication";
-import {useEffect, useState} from "react";
-import platform from "platform";
+import {useState} from "react";
 import {Loader} from "lucide-react";
 
 const formSchema = z.object({
-    username: z.string({required_error: "Username is required"}).min(3, {
+    email: z.string({required_error: "Username is required"}).min(3, {
         message: "Name length must be 3 characters",
     }).max(50),
     password: z.string({required_error: "Password is required"}).min(2, {
@@ -23,12 +22,6 @@ const formSchema = z.object({
 
 export const LoginForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [info, setInfo] = useState<string>("")
-    useEffect(() => {
-        const info = platform.parse(navigator.userAgent);
-        const os = `${info?.os?.family} ${info?.os?.version}`;
-        setInfo(os)
-    })
     const router = useRouter()
     const mutation = useAdminLoginLoginPost({
         mutation: {
@@ -47,7 +40,7 @@ export const LoginForm = () => {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        mutation.mutate({data: {...values, platform: info}})
+        mutation.mutate({data: values})
         setIsLoading(true)
     }
 
@@ -56,7 +49,7 @@ export const LoginForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
                 <FormField
                     control={form.control}
-                    name="username"
+                    name="email"
                     render={({field}) => (
                         <FormItem>
                             <FormLabel>Username</FormLabel>

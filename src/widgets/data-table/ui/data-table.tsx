@@ -11,7 +11,7 @@ import {
 import {flexRender, useReactTable} from "@tanstack/react-table";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/shared/ui/table";
 import {Button} from "@/shared/ui/button";
-import {ChevronLeft, ChevronRight, Filter} from "lucide-react";
+import {ChevronLeft, ChevronRight, Filter, Trash} from "lucide-react";
 import {useState} from "react";
 import {Input} from "@/shared/ui/input";
 import {
@@ -24,6 +24,7 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    // onRowClick?: () => void
 }
 
 export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, TValue>) {
@@ -32,6 +33,8 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
     )
     const [columnVisibility, setColumnVisibility] =
         useState<VisibilityState>({})
+    const [rowSelection, setRowSelection] = useState({})
+
     const table = useReactTable({
         data,
         columns,
@@ -40,12 +43,15 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
         onColumnFiltersChange: setColumnFilters,
         onColumnVisibilityChange: setColumnVisibility,
         getFilteredRowModel: getFilteredRowModel(),
+        onRowSelectionChange: setRowSelection,
+
         state: {
             columnFilters,
-            columnVisibility
+            columnVisibility,
+            rowSelection
         },
     })
-    const [filterColumn, setFilterColumn] = useState<string>(table.getAllColumns()[0].id)
+    const [filterColumn, setFilterColumn] = useState<string>(table.getAllColumns()[1].id)
     return (
         <div className="max-w-full">
             <div className="flex gap-x-2 items-center py-4">
@@ -85,6 +91,8 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
+                {table.getFilteredSelectedRowModel().rows.length !== 0 &&
+                    <Button size="sm"><Trash className="h-4 w-4"/></Button>}
             </div>
             <div className="border rounded-md">
                 <Table>
@@ -112,6 +120,11 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
+                                    className="hover:cursor-pointer"
+                                    // onClick={() => {
+                                    //     onRowClick()
+                                    //     setCar(row.original)
+                                    // }}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>

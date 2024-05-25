@@ -20,10 +20,11 @@ import type {
 } from '@tanstack/react-query'
 import type {
   BodyCreateCarCarNewPost,
+  BodyEditCarCarEditPut,
   Car,
   CreateCarCarNewPostParams,
   DeleteCarCarDeleteDeleteParams,
-  EditCar,
+  EditCarCarEditPutParams,
   HTTPValidationError
 } from '.././model'
 import { createInstance } from '.././http/index';
@@ -224,14 +225,18 @@ export const useCreateCarCarNewPost = <TError = HTTPValidationError,
  * @summary Edit Car
  */
 export const editCarCarEditPut = (
-    editCar: BodyType<EditCar>,
+    bodyEditCarCarEditPut: BodyType<BodyEditCarCarEditPut>,
+    params: EditCarCarEditPutParams,
  options?: SecondParameter<typeof createInstance>,) => {
       
-      
+      const formData = new FormData();
+formData.append('photo', bodyEditCarCarEditPut.photo)
+
       return createInstance<Car>(
       {url: `/car/edit`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: editCar
+      headers: {'Content-Type': 'multipart/form-data', },
+       data: formData,
+        params
     },
       options);
     }
@@ -239,17 +244,17 @@ export const editCarCarEditPut = (
 
 
 export const getEditCarCarEditPutMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editCarCarEditPut>>, TError,{data: BodyType<EditCar>}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof editCarCarEditPut>>, TError,{data: BodyType<EditCar>}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editCarCarEditPut>>, TError,{data: BodyType<BodyEditCarCarEditPut>;params: EditCarCarEditPutParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof editCarCarEditPut>>, TError,{data: BodyType<BodyEditCarCarEditPut>;params: EditCarCarEditPutParams}, TContext> => {
 const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof editCarCarEditPut>>, {data: BodyType<EditCar>}> = (props) => {
-          const {data} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof editCarCarEditPut>>, {data: BodyType<BodyEditCarCarEditPut>;params: EditCarCarEditPutParams}> = (props) => {
+          const {data,params} = props ?? {};
 
-          return  editCarCarEditPut(data,requestOptions)
+          return  editCarCarEditPut(data,params,requestOptions)
         }
 
         
@@ -258,18 +263,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
   return  { mutationFn, ...mutationOptions }}
 
     export type EditCarCarEditPutMutationResult = NonNullable<Awaited<ReturnType<typeof editCarCarEditPut>>>
-    export type EditCarCarEditPutMutationBody = BodyType<EditCar>
+    export type EditCarCarEditPutMutationBody = BodyType<BodyEditCarCarEditPut>
     export type EditCarCarEditPutMutationError = HTTPValidationError
 
     /**
  * @summary Edit Car
  */
 export const useEditCarCarEditPut = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editCarCarEditPut>>, TError,{data: BodyType<EditCar>}, TContext>, request?: SecondParameter<typeof createInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof editCarCarEditPut>>, TError,{data: BodyType<BodyEditCarCarEditPut>;params: EditCarCarEditPutParams}, TContext>, request?: SecondParameter<typeof createInstance>}
 ): UseMutationResult<
         Awaited<ReturnType<typeof editCarCarEditPut>>,
         TError,
-        {data: BodyType<EditCar>},
+        {data: BodyType<BodyEditCarCarEditPut>;params: EditCarCarEditPutParams},
         TContext
       > => {
 

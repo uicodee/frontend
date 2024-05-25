@@ -5,11 +5,21 @@
  * Taxopark is a company that transports passengers between cities
  * OpenAPI spec version: 1.0.0
  */
-import type {MutationFunction, UseMutationOptions, UseMutationResult} from '@tanstack/react-query'
-import {useMutation} from '@tanstack/react-query'
-import type {BodyAdminLoginLoginPost, HTTPValidationError, Token} from '.././model'
-import type {BodyType} from '.././http/index';
-import {createInstance} from '.././http/index';
+import {
+  useMutation
+} from '@tanstack/react-query'
+import type {
+  MutationFunction,
+  UseMutationOptions,
+  UseMutationResult
+} from '@tanstack/react-query'
+import type {
+  HTTPValidationError,
+  LoginUser,
+  Token
+} from '.././model'
+import { createInstance } from '.././http/index';
+import type { BodyType } from '.././http/index';
 
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
@@ -20,145 +30,113 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
  * @summary Admin Login
  */
 export const adminLoginLoginPost = (
-    bodyAdminLoginLoginPost: BodyType<BodyAdminLoginLoginPost>,
-    options?: SecondParameter<typeof createInstance>,) => {
-
-    const formUrlEncoded = new URLSearchParams();
-    formUrlEncoded.append('platform', bodyAdminLoginLoginPost.platform)
-    if (bodyAdminLoginLoginPost.grant_type !== undefined) {
-        // @ts-expect-error
-        formUrlEncoded.append('grant_type', bodyAdminLoginLoginPost.grant_type)
+    loginUser: BodyType<LoginUser>,
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<Token>(
+      {url: `/login`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: loginUser
+    },
+      options);
     }
-    formUrlEncoded.append('username', bodyAdminLoginLoginPost.username)
-    formUrlEncoded.append('password', bodyAdminLoginLoginPost.password)
-    if (bodyAdminLoginLoginPost.scope !== undefined) {
-        formUrlEncoded.append('scope', bodyAdminLoginLoginPost.scope)
-    }
-    if (bodyAdminLoginLoginPost.client_id !== undefined) {
-        // @ts-expect-error
-        formUrlEncoded.append('client_id', bodyAdminLoginLoginPost.client_id)
-    }
-    if (bodyAdminLoginLoginPost.client_secret !== undefined) {
-        // @ts-expect-error
-        formUrlEncoded.append('client_secret', bodyAdminLoginLoginPost.client_secret)
-    }
-
-    return createInstance<Token>(
-        {
-            url: `/login`, method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded',},
-            data: formUrlEncoded
-        },
-        options);
-}
+  
 
 
 export const getAdminLoginLoginPostMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: {
-                            mutation?: UseMutationOptions<Awaited<ReturnType<typeof adminLoginLoginPost>>, TError, {
-                                data: BodyType<BodyAdminLoginLoginPost>
-                            }, TContext>,
-                            request?: SecondParameter<typeof createInstance>
-                        }
-): UseMutationOptions<Awaited<ReturnType<typeof adminLoginLoginPost>>, TError, {
-    data: BodyType<BodyAdminLoginLoginPost>
-}, TContext> => {
-    const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminLoginLoginPost>>, TError,{data: BodyType<LoginUser>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof adminLoginLoginPost>>, TError,{data: BodyType<LoginUser>}, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
 
 
-    const mutationFn: MutationFunction<Awaited<ReturnType<typeof adminLoginLoginPost>>, {
-        data: BodyType<BodyAdminLoginLoginPost>
-    }> = (props) => {
-        const {data} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof adminLoginLoginPost>>, {data: BodyType<LoginUser>}> = (props) => {
+          const {data} = props ?? {};
 
-        return adminLoginLoginPost(data, requestOptions)
-    }
+          return  adminLoginLoginPost(data,requestOptions)
+        }
+
+        
 
 
-    return {mutationFn, ...mutationOptions}
-}
+  return  { mutationFn, ...mutationOptions }}
 
-export type AdminLoginLoginPostMutationResult = NonNullable<Awaited<ReturnType<typeof adminLoginLoginPost>>>
-export type AdminLoginLoginPostMutationBody = BodyType<BodyAdminLoginLoginPost>
-export type AdminLoginLoginPostMutationError = HTTPValidationError
+    export type AdminLoginLoginPostMutationResult = NonNullable<Awaited<ReturnType<typeof adminLoginLoginPost>>>
+    export type AdminLoginLoginPostMutationBody = BodyType<LoginUser>
+    export type AdminLoginLoginPostMutationError = HTTPValidationError
 
-/**
+    /**
  * @summary Admin Login
  */
 export const useAdminLoginLoginPost = <TError = HTTPValidationError,
-    TContext = unknown>(options?: {
-                            mutation?: UseMutationOptions<Awaited<ReturnType<typeof adminLoginLoginPost>>, TError, {
-                                data: BodyType<BodyAdminLoginLoginPost>
-                            }, TContext>,
-                            request?: SecondParameter<typeof createInstance>
-                        }
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminLoginLoginPost>>, TError,{data: BodyType<LoginUser>}, TContext>, request?: SecondParameter<typeof createInstance>}
 ): UseMutationResult<
-    Awaited<ReturnType<typeof adminLoginLoginPost>>,
-    TError,
-    { data: BodyType<BodyAdminLoginLoginPost> },
-    TContext
-> => {
+        Awaited<ReturnType<typeof adminLoginLoginPost>>,
+        TError,
+        {data: BodyType<LoginUser>},
+        TContext
+      > => {
 
-    const mutationOptions = getAdminLoginLoginPostMutationOptions(options);
+      const mutationOptions = getAdminLoginLoginPostMutationOptions(options);
 
-    return useMutation(mutationOptions);
-}
-/**
+      return useMutation(mutationOptions);
+    }
+    /**
  * Refresh token
  * @summary Refresh Token
  */
 export const refreshTokenRefreshTokenPost = (
-    options?: SecondParameter<typeof createInstance>,) => {
-
-
-    return createInstance<Token>(
-        {
-            url: `/refresh-token`, method: 'POST'
-        },
-        options);
-}
+    
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<Token>(
+      {url: `/refresh-token`, method: 'POST'
+    },
+      options);
+    }
+  
 
 
 export const getRefreshTokenRefreshTokenPostMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: {
-                            mutation?: UseMutationOptions<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, TError, void, TContext>,
-                            request?: SecondParameter<typeof createInstance>
-                        }
-): UseMutationOptions<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, TError, void, TContext> => {
-    const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, TError,void, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, TError,void, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
 
 
-    const mutationFn: MutationFunction<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, void> = () => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, void> = () => {
+          
+
+          return  refreshTokenRefreshTokenPost(requestOptions)
+        }
+
+        
 
 
-        return refreshTokenRefreshTokenPost(requestOptions)
-    }
+  return  { mutationFn, ...mutationOptions }}
 
+    export type RefreshTokenRefreshTokenPostMutationResult = NonNullable<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>>
+    
+    export type RefreshTokenRefreshTokenPostMutationError = HTTPValidationError
 
-    return {mutationFn, ...mutationOptions}
-}
-
-export type RefreshTokenRefreshTokenPostMutationResult = NonNullable<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>>
-
-export type RefreshTokenRefreshTokenPostMutationError = HTTPValidationError
-
-/**
+    /**
  * @summary Refresh Token
  */
 export const useRefreshTokenRefreshTokenPost = <TError = HTTPValidationError,
-    TContext = unknown>(options?: {
-                            mutation?: UseMutationOptions<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, TError, void, TContext>,
-                            request?: SecondParameter<typeof createInstance>
-                        }
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>, TError,void, TContext>, request?: SecondParameter<typeof createInstance>}
 ): UseMutationResult<
-    Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>,
-    TError,
-    void,
-    TContext
-> => {
+        Awaited<ReturnType<typeof refreshTokenRefreshTokenPost>>,
+        TError,
+        void,
+        TContext
+      > => {
 
-    const mutationOptions = getRefreshTokenRefreshTokenPostMutationOptions(options);
+      const mutationOptions = getRefreshTokenRefreshTokenPostMutationOptions(options);
 
-    return useMutation(mutationOptions);
-}
+      return useMutation(mutationOptions);
+    }
     

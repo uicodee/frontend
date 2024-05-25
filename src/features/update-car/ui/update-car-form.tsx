@@ -1,17 +1,16 @@
 "use client"
 
 import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
+import {useUpdateCar} from "../model/store";
+import {useQueryClient} from "@tanstack/react-query";
+import {useEditCarCarEditPut} from "@/shared/api/car/car";
 import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/shared/ui/form";
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
-import {useCreateCarCarNewPost} from "@/shared/api/car/car";
-import {useQueryClient} from "@tanstack/react-query";
-import {useCreateCar} from "../model/store"
-
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/png"];
+import axios from "axios";
+import {useState} from "react";
 
 
 const formSchema = z.object({
@@ -20,16 +19,16 @@ const formSchema = z.object({
     }).max(50),
     numberOfSeats: z.number({required_error: "Seat count is required"}),
     photo: (typeof window === "undefined" ? z.any() : z
-        .instanceof(FileList)
-        .refine(files => files.length === 1, "Please upload a single file")
-        .refine(files => ACCEPTED_FILE_TYPES.includes(files[0]?.type), "Only .jpeg and .png files are accepted")
-        .refine(files => files[0]?.size <= MAX_FILE_SIZE, `File size must be less than ${MAX_FILE_SIZE / 1024 / 1024}MB`))
+        .instanceof(FileList,)
+        .optional())
 })
 
-export const CreateCarForm = () => {
-    const setOpen = useCreateCar((state) => state.setOpen)
+export const UpdateCarForm = () => {
+    const car = useUpdateCar((state) => state.car)
+    const setOpen = useUpdateCar((state) => state.setOpen)
+    const [photo, setPhoto] = useState<Blob>()
     const queryClient = useQueryClient()
-    const mutation = useCreateCarCarNewPost({
+    const mutation = useEditCarCarEditPut({
         mutation: {
             onSuccess: () => {
                 queryClient.invalidateQueries({queryKey: ["cars"]}).then(() => setOpen(false))
@@ -37,15 +36,19 @@ export const CreateCarForm = () => {
         }
     })
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: car.name,
+            numberOfSeats: car.numberOfSeats
+        }
     })
-
     const photoRef = form.register("photo");
 
     function onSubmit(values: z.infer<typeof formSchema>) {
+        axios.get(car.photo as string, {responseType: "blob"}).then(r => setPhoto(r.data))
         mutation.mutate({
-            data: {photo: values.photo[0]},
-            params: {name: values.name, numberOfSeats: Number(values.numberOfSeats)}
+            data: {photo: values.photo[0] === undefined ? photo : values.photo[0]},
+            params: {carId: car.id, name: values.name, numberOfSeats: Number(values.numberOfSeats)}
         })
     }
 
@@ -91,7 +94,7 @@ export const CreateCarForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">Create</Button>
+                <Button type="submit" className="w-full">Update</Button>
             </form>
         </Form>
     )
