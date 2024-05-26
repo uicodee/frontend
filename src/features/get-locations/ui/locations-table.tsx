@@ -44,6 +44,7 @@ export const LocationsTable = () => {
         columns={columns}
         data={data}
         isLoading={isLoading}
+        onDelete={() => console.log("delete")}
         onRowClick={() => setOpen(true)}
         setData={(location) => setLocation(location)}/>
 }

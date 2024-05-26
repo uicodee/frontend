@@ -1,7 +1,7 @@
 "use client"
 
 import {Card, CardContent, CardHeader, CardTitle} from "@/shared/ui/card";
-import {Car, CarTaxiFront, Mail, MapPin, TrafficCone, Users} from "lucide-react";
+import {Car, CarTaxiFront, DollarSign, Mail, MapPin, TicketPercent, TrafficCone, Users} from "lucide-react";
 import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis} from "recharts";
 import {useGetAllStatsStatisticsAllGet} from "@/shared/api/statistics/statistics";
 import {Skeleton} from "@/shared/ui/skeleton";
@@ -88,11 +88,21 @@ export default function Home() {
             name: "SMS",
             value: statistics?.sms,
             icon: <Mail/>
+        },
+        {
+            name: "Income",
+            value: statistics?.income,
+            icon: <DollarSign/>
+        },
+        {
+            name: "Promocodes",
+            value: 3,
+            icon: <TicketPercent/>
         }
     ]
     return (
         <div className="space-y-4">
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-6">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                 {datas.map((item, index) => (
                     <Card key={index}>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

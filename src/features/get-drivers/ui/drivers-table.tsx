@@ -6,6 +6,7 @@ import {Driver} from "@/shared/api/model";
 import {Check, X} from "lucide-react";
 import {DataTable} from "@/widgets/data-table";
 import {useViewDriver} from "@/features/view-driver";
+import {Checkbox} from "@/shared/ui/checkbox";
 
 export const DriversTable = () => {
     const setOpen = useViewDriver((state) => state.setOpen)
@@ -13,6 +14,26 @@ export const DriversTable = () => {
     const {data: drivers, isLoading} = useGetDriversDriverAllGet()
     const data = drivers || []
     const columns: ColumnDef<Driver>[] = [
+        {
+            id: "select",
+            header: ({table}) => (
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Select all"
+                />
+            ),
+            cell: ({row}) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Select row"
+                />
+            )
+        },
         {
             accessorKey: "fullName",
             header: "Fullname",
@@ -70,5 +91,6 @@ export const DriversTable = () => {
         isLoading={isLoading}
         onRowClick={() => setOpen(true)}
         setData={(driver) => setDriver(driver)}
+        onDelete={() => console.log("delete")}
     />
 }

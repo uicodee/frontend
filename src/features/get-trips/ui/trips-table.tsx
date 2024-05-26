@@ -5,11 +5,32 @@ import {ColumnDef} from "@tanstack/table-core";
 import {Trips} from "@/shared/api/model";
 import {Check, X} from "lucide-react";
 import {DataTable} from "@/widgets/data-table";
+import {Checkbox} from "@/shared/ui/checkbox";
 
 export const TripsTable = () => {
     const {data: trips, isLoading} = useGetTripsTripAllGet()
     const data = trips || []
     const columns: ColumnDef<Trips>[] = [
+        {
+            id: "select",
+            header: ({table}) => (
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Select all"
+                />
+            ),
+            cell: ({row}) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Select row"
+                />
+            )
+        },
         {
             accessorKey: "departure",
             header: "Departure",
@@ -57,5 +78,5 @@ export const TripsTable = () => {
             }
         }
     ]
-    return <DataTable columns={columns} data={data} isLoading={isLoading}/>
+    return <DataTable columns={columns} data={data} onDelete={() => console.log("delete")} isLoading={isLoading}/>
 }

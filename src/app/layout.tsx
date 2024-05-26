@@ -17,7 +17,7 @@ export default function RootLayout({
 
     return (
         <ReactQueryClientProvider>
-            <html lang="en" className="h-full w-full" suppressHydrationWarning>
+            <html lang="en" className="h-full w-full" style={{scrollbarGutter: "stable"}} suppressHydrationWarning>
             <body className={cn(GeistSans.className, "h-full w-full")}>
             <ThemeProvider
                 attribute="class"

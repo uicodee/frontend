@@ -25,15 +25,17 @@ import {Skeleton} from "@/shared/ui/skeleton";
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
-    isLoading: boolean
+    isLoading: boolean,
+    onDelete: () => void
     onRowClick?: () => void
-    setData?: (data: TData) => void
+    setData?: (data: TData) => void,
 }
 
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,
                                              isLoading,
+                                             onDelete,
                                              onRowClick,
                                              setData
                                          }: DataTableProps<TData, TValue>) {
@@ -101,7 +103,7 @@ export function DataTable<TData, TValue>({
                     </DropdownMenu>
                 </div>
                 {table.getFilteredSelectedRowModel().rows.length !== 0 &&
-                    <Button size="sm"><Trash className="h-4 w-4"/></Button>}
+                    <Button size="sm" onClick={onDelete}><Trash className="h-4 w-4"/></Button>}
             </div>
             <div className="border rounded-md">
                 {isLoading ? <Skeleton className="w-full h-[200px]"/> : (

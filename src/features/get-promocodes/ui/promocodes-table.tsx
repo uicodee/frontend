@@ -47,5 +47,5 @@ export const PromocodesTable = () => {
             header: "Expires at",
         }
     ]
-    return <DataTable columns={columns} data={data} isLoading={isLoading}/>
+    return <DataTable columns={columns} data={data} onDelete={() => console.log("delete")} isLoading={isLoading}/>
 }

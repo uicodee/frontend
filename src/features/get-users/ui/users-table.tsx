@@ -5,11 +5,32 @@ import {ColumnDef} from "@tanstack/table-core";
 import {BasePassenger} from "@/shared/api/model";
 import {Check, X} from "lucide-react";
 import {DataTable} from "@/widgets/data-table";
+import {Checkbox} from "@/shared/ui/checkbox";
 
 export const UsersTable = () => {
     const {data: users, isLoading} = useGetPassengersPassengerAllGet()
     const data = users || []
     const columns: ColumnDef<BasePassenger>[] = [
+        {
+            id: "select",
+            header: ({table}) => (
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Select all"
+                />
+            ),
+            cell: ({row}) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Select row"
+                />
+            )
+        },
         {
             accessorKey: "fullName",
             header: "Fullname",
@@ -39,5 +60,5 @@ export const UsersTable = () => {
             }
         }
     ]
-    return <DataTable columns={columns} data={data} isLoading={isLoading}/>
+    return <DataTable columns={columns} data={data} onDelete={() => console.log("delete")} isLoading={isLoading}/>
 }

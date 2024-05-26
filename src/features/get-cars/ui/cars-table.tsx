@@ -31,11 +31,7 @@ export const CarsTable = () => {
                     onCheckedChange={(value) => row.toggleSelected(!!value)}
                     aria-label="Select row"
                 />
-            ),
-            enableColumnFilter: false,
-            enableHiding: false,
-            enableSorting: false,
-            enableGlobalFilter: false
+            )
         },
         {
             accessorKey: "name",
@@ -50,6 +46,7 @@ export const CarsTable = () => {
         columns={columns}
         data={data}
         isLoading={isLoading}
+        onDelete={() => console.log("delete")}
         onRowClick={() => setOpen(true)}
         setData={(car) => setCar(car)}
     />
