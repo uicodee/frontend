@@ -5,8 +5,11 @@ import {ColumnDef} from "@tanstack/table-core";
 import {Driver} from "@/shared/api/model";
 import {Check, X} from "lucide-react";
 import {DataTable} from "@/widgets/data-table";
+import {useViewDriver} from "@/features/view-driver";
 
 export const DriversTable = () => {
+    const setOpen = useViewDriver((state) => state.setOpen)
+    const setDriver = useViewDriver((state) => state.setDriver)
     const {data: drivers, isLoading} = useGetDriversDriverAllGet()
     const data = drivers || []
     const columns: ColumnDef<Driver>[] = [
@@ -61,5 +64,11 @@ export const DriversTable = () => {
             enableHiding: true
         }
     ]
-    return <DataTable columns={columns} data={data} isLoading={isLoading}/>
+    return <DataTable
+        columns={columns}
+        data={data}
+        isLoading={isLoading}
+        onRowClick={() => setOpen(true)}
+        setData={(driver) => setDriver(driver)}
+    />
 }

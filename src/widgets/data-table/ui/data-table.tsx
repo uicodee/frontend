@@ -26,9 +26,17 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     isLoading: boolean
+    onRowClick?: () => void
+    setData?: (data: TData) => void
 }
 
-export function DataTable<TData, TValue>({columns, data, isLoading}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+                                             columns,
+                                             data,
+                                             isLoading,
+                                             onRowClick,
+                                             setData
+                                         }: DataTableProps<TData, TValue>) {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
         []
     )
@@ -123,6 +131,12 @@ export function DataTable<TData, TValue>({columns, data, isLoading}: DataTablePr
                                         key={row.id}
                                         data-state={row.getIsSelected() && "selected"}
                                         className="hover:cursor-pointer"
+                                        onClick={() => {
+                                            if (onRowClick && setData) {
+                                                onRowClick()
+                                                setData(row.original)
+                                            }
+                                        }}
                                         // onClick={() => {
                                         //     onRowClick()
                                         //     setCar(row.original)

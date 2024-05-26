@@ -5,7 +5,7 @@ import {CreatePromocode} from "@/shared/dialogs/promocode";
 import {CreatePromocodeButton} from "@/features/create-promocode";
 
 export const metadata: Metadata = {
-    title: "Promocode"
+    title: "Promocodes"
 };
 
 export default function Page() {
