@@ -14,7 +14,7 @@ export const ViewDriver = () => {
 
     return (
         <ViewModal title={driver.fullName} open={open} setOpen={setOpen} fullScreen>
-            <div className="grid h-full grid-cols-3 place-content-start place-items-start gap-4 ">
+            <div className="space-y-2 md:grid h-full md:grid-cols-3 gap-4 ">
                 {/*<ViewDriverItem className="col-span-1">*/}
                 {/*    <AspectRatio ratio={9 / 16} className="bg-muted">*/}
                 {/*        <Image fill src={driver.driverPhoto} alt={driver.fullName} className="object-cover rounded-md"/>*/}
