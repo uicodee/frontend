@@ -26,7 +26,7 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     isLoading: boolean,
-    onDelete: () => void
+    onDelete: (data: TData[]) => void
     onRowClick?: () => void
     setData?: (data: TData) => void,
 }
@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
     })
     const [filterColumn, setFilterColumn] = useState<string>(table.getAllColumns()[1].id)
     return (
-        <div className="max-w-full">
+        <div className="max-w-full h-full">
             <div className="flex gap-x-2 items-center py-4">
                 <Input
                     placeholder="Search"
@@ -86,24 +86,28 @@ export function DataTable<TData, TValue>({
                             {table
                                 .getAllColumns()
                                 .map((column) => {
+                                    console.log(table.getHeaderGroups())
                                     return (
-                                        <DropdownMenuCheckboxItem
-                                            key={column.id}
-                                            className="capitalize"
-                                            checked={column.id === filterColumn}
-                                            onCheckedChange={() =>
-                                                setFilterColumn(column.id)
-                                            }
-                                        >
-                                            {column.id}
-                                        </DropdownMenuCheckboxItem>
-                                    )
+                                        column.getCanFilter() && (
+                                            <DropdownMenuCheckboxItem
+                                                key={column.id}
+                                                className="capitalize"
+                                                checked={column.id === filterColumn}
+                                                onCheckedChange={() => setFilterColumn(column.id)}
+                                            >
+                                                {column.id}
+                                            </DropdownMenuCheckboxItem>
+                                        )
+                                    );
                                 })}
+
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
                 {table.getFilteredSelectedRowModel().rows.length !== 0 &&
-                    <Button size="sm" onClick={onDelete}><Trash className="h-4 w-4"/></Button>}
+                    <Button size="sm"
+                            onClick={() => onDelete(table.getFilteredSelectedRowModel().rows.map(item => item.original))}><Trash
+                        className="h-4 w-4"/></Button>}
             </div>
             <div className="border rounded-md">
                 {isLoading ? <Skeleton className="w-full h-[200px]"/> : (

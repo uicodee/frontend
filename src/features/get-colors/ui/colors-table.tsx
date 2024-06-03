@@ -1,14 +1,23 @@
 "use client"
 
-import {useGetColorsColorAllGet} from "@/shared/api/color/color";
+import {useDeleteCarColorDeleteDelete, useGetColorsColorAllGet} from "@/shared/api/color/color";
 import {ColumnDef} from "@tanstack/table-core";
 import {ColorOutput} from "@/shared/api/model";
 import {DataTable} from "@/widgets/data-table";
 import {Checkbox} from "@/shared/ui/checkbox";
+import {useQueryClient} from "@tanstack/react-query";
 
 export const ColorsTable = () => {
     const {data: colors, isLoading} = useGetColorsColorAllGet({query: {queryKey: ["colors"]}})
     const data = colors || []
+    const queryClient = useQueryClient();
+    const mutation = useDeleteCarColorDeleteDelete({
+        mutation: {
+            onSuccess: () => {
+                void queryClient.invalidateQueries({queryKey: ["colors"]})
+            }
+        }
+    })
     const columns: ColumnDef<ColorOutput>[] = [
         {
             id: "select",
@@ -26,6 +35,7 @@ export const ColorsTable = () => {
                 <Checkbox
                     checked={row.getIsSelected()}
                     onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    onClick={(e) => e.stopPropagation()}
                     aria-label="Select row"
                 />
             )
@@ -45,5 +55,6 @@ export const ColorsTable = () => {
             }
         }
     ]
-    return <DataTable columns={columns} data={data} isLoading={isLoading} onDelete={() => console.log("delete")}/>
+    return <DataTable columns={columns} data={data} isLoading={isLoading}
+                      onDelete={(data) => mutation.mutate({data: data.map(item => item.id)})}/>
 }

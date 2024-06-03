@@ -19,7 +19,6 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query'
 import type {
-  DeleteLocationLocationDeleteDeleteParams,
   HTTPValidationError,
   LocationInput,
   LocationOutput
@@ -94,13 +93,14 @@ export const useCreateLocationLocationNewPost = <TError = HTTPValidationError,
  * @summary Delete Location
  */
 export const deleteLocationLocationDeleteDelete = (
-    params: DeleteLocationLocationDeleteDeleteParams,
+    deleteLocationLocationDeleteDeleteBody: BodyType<number[]>,
  options?: SecondParameter<typeof createInstance>,) => {
       
       
       return createInstance<unknown>(
       {url: `/location/delete`, method: 'DELETE',
-        params
+      headers: {'Content-Type': 'application/json', },
+      data: deleteLocationLocationDeleteDeleteBody
     },
       options);
     }
@@ -108,17 +108,17 @@ export const deleteLocationLocationDeleteDelete = (
 
 
 export const getDeleteLocationLocationDeleteDeleteMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{data: BodyType<number[]>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{data: BodyType<number[]>}, TContext> => {
 const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, {params: DeleteLocationLocationDeleteDeleteParams}> = (props) => {
-          const {params} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, {data: BodyType<number[]>}> = (props) => {
+          const {data} = props ?? {};
 
-          return  deleteLocationLocationDeleteDelete(params,requestOptions)
+          return  deleteLocationLocationDeleteDelete(data,requestOptions)
         }
 
         
@@ -127,18 +127,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
   return  { mutationFn, ...mutationOptions }}
 
     export type DeleteLocationLocationDeleteDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>>
-    
+    export type DeleteLocationLocationDeleteDeleteMutationBody = BodyType<number[]>
     export type DeleteLocationLocationDeleteDeleteMutationError = HTTPValidationError
 
     /**
  * @summary Delete Location
  */
 export const useDeleteLocationLocationDeleteDelete = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{params: DeleteLocationLocationDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>, TError,{data: BodyType<number[]>}, TContext>, request?: SecondParameter<typeof createInstance>}
 ): UseMutationResult<
         Awaited<ReturnType<typeof deleteLocationLocationDeleteDelete>>,
         TError,
-        {params: DeleteLocationLocationDeleteDeleteParams},
+        {data: BodyType<number[]>},
         TContext
       > => {
 

@@ -7,8 +7,8 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
 import {useRouter} from "next/navigation";
-import {useAdminLoginLoginPost} from "@/shared/api/authentication/authentication";
-import {useState} from "react";
+import {useAdminLoginLoginPost, useRefreshTokenRefreshTokenPost} from "@/shared/api/authentication/authentication";
+import {useEffect, useState} from "react";
 import {Loader} from "lucide-react";
 
 const formSchema = z.object({
@@ -28,13 +28,28 @@ export const LoginForm = () => {
             onSuccess: (data) => {
                 const item = {
                     accessToken: data.access_token,
-                    expiry: new Date().getTime() + (10000)
+                    expiry: new Date().getTime() + (data.expiresAt)
                 }
                 localStorage.setItem("accessToken", JSON.stringify(item))
                 router.replace("/")
             }
         }
     })
+    const refreshMutation = useRefreshTokenRefreshTokenPost({
+        mutation: {
+            onSuccess: (data) => {
+                const item = {
+                    accessToken: data.access_token,
+                    expiry: new Date().getTime() + (data.expiresAt)
+                }
+                localStorage.setItem("accessToken", JSON.stringify(item))
+                router.replace("/")
+            }
+        }
+    })
+    useEffect(() => {
+        refreshMutation.mutate()
+    }, []);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
     })

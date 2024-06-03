@@ -1,17 +1,26 @@
 "use client"
 
 import {DataTable} from "@/widgets/data-table";
-import {useGetCarsCarAllGet} from "@/shared/api/car/car";
+import {useDeleteCarCarDeleteDelete, useGetCarsCarAllGet} from "@/shared/api/car/car";
 import {ColumnDef} from "@tanstack/table-core";
 import {Car} from "@/shared/api/model";
 import {Checkbox} from "@/shared/ui/checkbox";
 import {useViewCar} from "@/features/view-car";
+import {useQueryClient} from "@tanstack/react-query";
 
 export const CarsTable = () => {
     const setOpen = useViewCar((state) => state.setOpen)
     const setCar = useViewCar((state) => state.setCar)
     const {data: cars, isLoading} = useGetCarsCarAllGet({query: {queryKey: ["cars"]}})
     const data = cars || []
+    const queryClient = useQueryClient();
+    const mutation = useDeleteCarCarDeleteDelete({
+        mutation: {
+            onSuccess: () => {
+                void queryClient.invalidateQueries({queryKey: ["cars"]})
+            }
+        }
+    })
     const columns: ColumnDef<Car>[] = [
         {
             id: "select",
@@ -29,6 +38,7 @@ export const CarsTable = () => {
                 <Checkbox
                     checked={row.getIsSelected()}
                     onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    onClick={(e) => e.stopPropagation()}
                     aria-label="Select row"
                 />
             )
@@ -46,7 +56,7 @@ export const CarsTable = () => {
         columns={columns}
         data={data}
         isLoading={isLoading}
-        onDelete={() => console.log("delete")}
+        onDelete={(data: Car[]) => mutation.mutate({data: data.map(item => item.id)})}
         onRowClick={() => setOpen(true)}
         setData={(car) => setCar(car)}
     />

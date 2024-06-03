@@ -24,7 +24,7 @@ export const Header = () => {
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="sm:max-w-xs">
-                    <nav className="grid gap-6 text-lg font-medium">
+                    <nav className="flex flex-col gap-6 text-lg font-medium">
                         <MenuCreator items={topMenuItems}/>
                         <MenuCreator items={bottomMenuItems}/>
                     </nav>

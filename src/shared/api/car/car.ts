@@ -23,7 +23,6 @@ import type {
   BodyEditCarCarEditPut,
   Car,
   CreateCarCarNewPostParams,
-  DeleteCarCarDeleteDeleteParams,
   EditCarCarEditPutParams,
   HTTPValidationError
 } from '.././model'
@@ -163,13 +162,14 @@ export const useEditCarCarEditPut = <TError = HTTPValidationError,
  * @summary Delete Car
  */
 export const deleteCarCarDeleteDelete = (
-    params: DeleteCarCarDeleteDeleteParams,
+    deleteCarCarDeleteDeleteBody: BodyType<number[]>,
  options?: SecondParameter<typeof createInstance>,) => {
       
       
       return createInstance<unknown>(
       {url: `/car/delete`, method: 'DELETE',
-        params
+      headers: {'Content-Type': 'application/json', },
+      data: deleteCarCarDeleteDeleteBody
     },
       options);
     }
@@ -177,17 +177,17 @@ export const deleteCarCarDeleteDelete = (
 
 
 export const getDeleteCarCarDeleteDeleteMutationOptions = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, TError,{params: DeleteCarCarDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, TError,{params: DeleteCarCarDeleteDeleteParams}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, TError,{data: BodyType<number[]>}, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, TError,{data: BodyType<number[]>}, TContext> => {
 const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, {params: DeleteCarCarDeleteDeleteParams}> = (props) => {
-          const {params} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, {data: BodyType<number[]>}> = (props) => {
+          const {data} = props ?? {};
 
-          return  deleteCarCarDeleteDelete(params,requestOptions)
+          return  deleteCarCarDeleteDelete(data,requestOptions)
         }
 
         
@@ -196,18 +196,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
   return  { mutationFn, ...mutationOptions }}
 
     export type DeleteCarCarDeleteDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>>
-    
+    export type DeleteCarCarDeleteDeleteMutationBody = BodyType<number[]>
     export type DeleteCarCarDeleteDeleteMutationError = HTTPValidationError
 
     /**
  * @summary Delete Car
  */
 export const useDeleteCarCarDeleteDelete = <TError = HTTPValidationError,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, TError,{params: DeleteCarCarDeleteDeleteParams}, TContext>, request?: SecondParameter<typeof createInstance>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>, TError,{data: BodyType<number[]>}, TContext>, request?: SecondParameter<typeof createInstance>}
 ): UseMutationResult<
         Awaited<ReturnType<typeof deleteCarCarDeleteDelete>>,
         TError,
-        {params: DeleteCarCarDeleteDeleteParams},
+        {data: BodyType<number[]>},
         TContext
       > => {
 

@@ -139,4 +139,60 @@ export const useRefreshTokenRefreshTokenPost = <TError = HTTPValidationError,
 
       return useMutation(mutationOptions);
     }
+    /**
+ * Logout from account
+ * @summary Logout From Account
+ */
+export const logoutFromAccountLogoutPost = (
+    
+ options?: SecondParameter<typeof createInstance>,) => {
+      
+      
+      return createInstance<unknown>(
+      {url: `/logout`, method: 'POST'
+    },
+      options);
+    }
+  
+
+
+export const getLogoutFromAccountLogoutPostMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof logoutFromAccountLogoutPost>>, TError,void, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof logoutFromAccountLogoutPost>>, TError,void, TContext> => {
+const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof logoutFromAccountLogoutPost>>, void> = () => {
+          
+
+          return  logoutFromAccountLogoutPost(requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type LogoutFromAccountLogoutPostMutationResult = NonNullable<Awaited<ReturnType<typeof logoutFromAccountLogoutPost>>>
+    
+    export type LogoutFromAccountLogoutPostMutationError = HTTPValidationError
+
+    /**
+ * @summary Logout From Account
+ */
+export const useLogoutFromAccountLogoutPost = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof logoutFromAccountLogoutPost>>, TError,void, TContext>, request?: SecondParameter<typeof createInstance>}
+): UseMutationResult<
+        Awaited<ReturnType<typeof logoutFromAccountLogoutPost>>,
+        TError,
+        void,
+        TContext
+      > => {
+
+      const mutationOptions = getLogoutFromAccountLogoutPostMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
     

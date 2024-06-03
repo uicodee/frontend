@@ -9,7 +9,7 @@ export default function Layout({
 }>) {
 
     return (
-        <div className="flex-grow bg-muted/40 min-h-full">
+        <div className="flex-grow bg-muted/40 min-h-full  md:h-full">
             <Aside/>
             <div className="flex-grow h-full sm:gap-4 sm:pl-14">
                 <Header/>

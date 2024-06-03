@@ -11,7 +11,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
             onSuccess: (data) => {
                 const item = {
                     accessToken: data.access_token,
-                    expiry: new Date().getTime() + (10000)
+                    expiry: new Date().getTime() + (data.expiresAt)
                 }
                 localStorage.setItem("accessToken", JSON.stringify(item))
             },

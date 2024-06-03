@@ -9,6 +9,8 @@
 export interface Token {
   /** Access Token */
   access_token: string;
+  /** Expiration Date */
+  expiresAt: number;
   /** Refresh Token */
   refresh_token: string;
   /** Token Type */

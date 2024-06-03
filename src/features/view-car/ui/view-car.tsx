@@ -3,19 +3,15 @@
 import {useViewCar} from "@/features/view-car";
 import Image from "next/image";
 import {AspectRatio} from "@/shared/ui/aspect-ratio";
-import {ViewSheet} from "@/shared/ui/view-sheet";
+import {ViewModal} from "@/shared/ui/view-modal";
 
 export const ViewCar = () => {
     const car = useViewCar((state) => state.car)
     const open = useViewCar((state) => state.open)
     const setOpen = useViewCar((state) => state.setOpen)
     return (
-        <ViewSheet open={open} setOpen={setOpen}>
-            <div className="flex flex-col justify-start gap-y-8 mt-5">
-                <div className="flex flex-col gap-1">
-                    <p className="text-sm font-medium leading-none">Car name</p>
-                    <p className="text-sm text-muted-foreground">{car.name}</p>
-                </div>
+        <ViewModal title={car.name} open={open} setOpen={setOpen}>
+            <div className="flex flex-col justify-start gap-y-4">
                 <div className="flex flex-col gap-1">
                     <p className="text-sm font-medium leading-none">Number of seats</p>
                     <p className="text-sm text-muted-foreground">{car.numberOfSeats}</p>
@@ -32,6 +28,6 @@ export const ViewCar = () => {
                     </AspectRatio>
                 </div>
             </div>
-        </ViewSheet>
+        </ViewModal>
     )
 }

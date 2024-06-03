@@ -1,11 +1,12 @@
 "use client"
 
-import {useGetLocationsLocationAllGet} from "@/shared/api/location/location";
+import {useDeleteLocationLocationDeleteDelete, useGetLocationsLocationAllGet} from "@/shared/api/location/location";
 import {ColumnDef} from "@tanstack/table-core";
 import {LocationOutput} from "@/shared/api/model";
 import {Checkbox} from "@/shared/ui/checkbox";
 import {DataTable} from "@/widgets/data-table";
 import {useViewLocation} from "@/features/view-location";
+import {useQueryClient} from "@tanstack/react-query";
 
 export const LocationsTable = () => {
     const setOpen = useViewLocation((state) => state.setOpen)
@@ -13,6 +14,14 @@ export const LocationsTable = () => {
 
     const {data: locations, isLoading} = useGetLocationsLocationAllGet({query: {queryKey: ["locations"]}})
     const data = locations || []
+    const queryClient = useQueryClient();
+    const mutation = useDeleteLocationLocationDeleteDelete({
+        mutation: {
+            onSuccess: () => {
+                void queryClient.invalidateQueries({queryKey: ["locations"]})
+            }
+        }
+    })
     const columns: ColumnDef<LocationOutput>[] = [
         {
             id: "select",
@@ -30,6 +39,7 @@ export const LocationsTable = () => {
                 <Checkbox
                     checked={row.getIsSelected()}
                     onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    onClick={(e) => e.stopPropagation()}
                     aria-label="Select row"
                 />
             ),
@@ -44,7 +54,7 @@ export const LocationsTable = () => {
         columns={columns}
         data={data}
         isLoading={isLoading}
-        onDelete={() => console.log("delete")}
+        onDelete={(locations) => mutation.mutate({data: locations.map((item) => item.id)})}
         onRowClick={() => setOpen(true)}
         setData={(location) => setLocation(location)}/>
 }
